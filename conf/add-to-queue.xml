@@ -1,0 +1,6 @@
+<Response>
+    <Say>You will now be placed on hold to wait for the first available operator.</Say>
+    <Dial>
+        <Conference muted="true" startConferenceOnEnter="false">onHoldConference</Conference>
+    </Dial>
+</Response>

@@ -1,0 +1,6 @@
+<Response>
+    <Say>Thank you for waiting. You will now be connected to an agent.</Say>
+    <Dial action="start-next-call.php">
+        <Number>512-555-1212</Number>
+    </Dial>
+</Response>
