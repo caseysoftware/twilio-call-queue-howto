@@ -72,22 +72,3 @@ request the next call on hold.
 
 The full Queue documentation is available here:
 http://www.twilio.com/docs/api/twiml/queue and http://www.twilio.com/docs/api/rest/queue
-
-
-
-By the numbers:
-
-Conference
--  creating in advance:                      not possible
--  retrieving stats for 10 participants:     2 API requests, 10 item loop
--  retrieving stats for 100 participants:    6 API requests, 100 item loop
--  retrieving stats for 1000 participants:  50 API requests, 1000 item loop
--  transferring a caller to an agent:        3 API requests
-
-
-Queue:
--  creating in advance:                      1 API request
--  retrieving stats for 10 participants:     1 API request
--  retrieving stats for 100 participants:    1 API request
--  retrieving stats for 1000 participants:   1 API request
--  transferring a caller to an agent:        1 API request
