@@ -1,42 +1,37 @@
 
-# Call Queuing with Twilio
+# Call Queuing Comparison - using Twilio
 
-A comparison of two approaches to perform call queuing with Twilio. This is often 
-used to keep people on hold until a customer service representative is ready to 
-take the call.
+Whether you're running a call center, just a small office, or have to deal with 
+all of the incoming calls for that event tonight, putting people on hold (aka 
+call queuing) is an important but often difficult process.
 
-Built for explanation & demo purposes, September 2012.
+The old approach was multiple phone lines and placing a call on hold meant 
+tying up a line and busy signals.
 
-The full Queue documentation is available here:
-http://www.twilio.com/docs/api/twiml/queue and http://www.twilio.com/docs/api/rest/queue
+With Twilio, one solution was to put the caller into a Conference call on mute. 
+While it worked, "managing" the individual conferences, connecting to the person 
+who has waited the longest, etc requires an extra layer of business logic.
+
+Since the launch of our new Queue functionality, there's an easier way..
 
 
 ## Summary
 
-The primary approach for building and using call queues with Twilio used to be via 
-muted Conference calls. While it worked, the new Queue functionality makes call 
-queuing faster and more reliable with a fraction of the code.
+Using Queue, "managing" a call queue is as simple as three steps:
 
-The old implementation is available in conf/ConferenceManager.php
-
-The new implementation is available in queue/QueueManager.php
-
-How it works:
-
-1.  A phone call comes in via your Twilio phone number and is added to an On 
-Hold queue waiting for the next request.
-1.  As needed, you can retrieve statistics like Average Wait Time and Current 
-Queue Size.
-1.  When the next customer service representative is ready, you request the next caller.
+1.  Incoming calls are directed to the Queue using the Dial/Queue TwiML combination.
+1.  (optional) You can retrieve statistics like Average Wait Time and Current 
+Queue Size using the REST Queue resource.
+1.  To connect to the next caller, you make a single API request to the Queue.
 
 Some notes of the Queue-based approach:
 
 -  A single Queue allows 100 participants by default but can support up to 1000 
 participants.
 
--  Queues can be created in advance and remain even when there are zero 
-participants so you can create it, store the Queue Sid locally, and never need 
-to request the active Queues again.
+-  Queues can be created in advance and continue to exist even when there are zero 
+participants. This allows you to create it once, store the Queue Sid locally, and 
+never need to request the active Queues again.
 
 -  Once you have the Queue Sid (available at creation, as noted above), you can 
 retrieve both the total participants on hold and the average waiting time in a 
@@ -44,7 +39,6 @@ single request no matter how many people are waiting.
 
 -  Transferring a call out of a Queue requires one step: use the Queue Sid to 
 request the next call on hold.
-
 
 ### Detailed Usage:
 
@@ -58,11 +52,20 @@ request to the Queue resource simply returns both without further effort.
 load start-next-call.php which makes a single API request to 
 Queue/QUxxxx/Members/Front resource with the redirect-to-agent.xml file.
 
-### Differences by the numbers:
+The full Queue documentation is available here:
+http://www.twilio.com/docs/api/twiml/queue and http://www.twilio.com/docs/api/rest/queue
+
+## Call Queuing Comparison
 
 While the implementations are interchangable, behind the scenes using Queue 
 reduces the overall code by 1/3, the number of API requests by 50-75%, and gives 
 you more flexibility in general.
+
+The old implementation is available in [conf/ConferenceManager.php](https://github.com/caseysoftware/twilio-call-queue-howto/blob/master/old/ConferenceManager.php)
+
+The new implementation is available in [queue/QueueManager.php](https://github.com/caseysoftware/twilio-call-queue-howto/blob/master/queue/QueueManager.php)
+
+### by the numbers:
 
 Old way (using Conference):
 -  creating in advance:                     not possible
@@ -81,3 +84,5 @@ Queue:
 
 The full Queue documentation is available here:
 http://www.twilio.com/docs/api/twiml/queue and http://www.twilio.com/docs/api/rest/queue
+
+Built for explanation & demo purposes, September 2012.
