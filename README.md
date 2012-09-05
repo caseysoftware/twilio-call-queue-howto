@@ -22,7 +22,7 @@ Using Queue, "managing" a call queue is as simple as three steps:
 1.  Incoming calls are directed to the Queue using the Dial/Queue TwiML combination.
 1.  (optional) You can retrieve statistics like Average Wait Time and Current 
 Queue Size using the REST Queue resource.
-1.  To connect to the next caller, you make a single API request to the Queue.
+1.  Connecting to the next caller is a a single API request to the Queue.
 
 Some notes of the Queue-based approach:
 
@@ -39,6 +39,9 @@ single request no matter how many people are waiting.
 
 -  Transferring a call out of a Queue requires one step: use the Queue Sid to 
 request the next call on hold.
+
+For an example in action, be sure to check out [Jon Gottfried's
+screencast](https://www.youtube.com/watch?v=AICLFi2djbs).
 
 ### Detailed Usage:
 
@@ -61,11 +64,11 @@ While the implementations are interchangable, behind the scenes using Queue
 reduces the overall code by 1/3, the number of API requests by 50-75%, and gives 
 you more flexibility in general.
 
-The old implementation is available in [conf/ConferenceManager.php](https://github.com/caseysoftware/twilio-call-queue-howto/blob/master/old/ConferenceManager.php)
+The old implementation is available in [old/ConferenceManager.php](https://github.com/caseysoftware/twilio-call-queue-howto/blob/master/old/ConferenceManager.php)
 
 The new implementation is available in [queue/QueueManager.php](https://github.com/caseysoftware/twilio-call-queue-howto/blob/master/queue/QueueManager.php)
 
-### by the numbers:
+### By the numbers:
 
 Old way (using Conference):
 -  creating in advance:                     not possible
@@ -84,5 +87,8 @@ Queue:
 
 The full Queue documentation is available here:
 http://www.twilio.com/docs/api/twiml/queue and http://www.twilio.com/docs/api/rest/queue
+
+
+If you prefer Python, check out [Rob Spectre's Twilio Queue Example](https://github.com/RobSpectre/Twilio-Queue-Example).
 
 Built for explanation & demo purposes, September 2012.
