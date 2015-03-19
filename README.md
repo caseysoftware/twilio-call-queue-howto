@@ -92,5 +92,3 @@ http://www.twilio.com/docs/api/twiml/queue and http://www.twilio.com/docs/api/re
 If you prefer Python, check out [Rob Spectre's Twilio Queue Example](https://github.com/RobSpectre/Twilio-Queue-Example).
 
 Built for explanation & demo purposes, September 2012.
-
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/9c203be2b6f998875736e9faeccefce9 "githalytics.com")](http://githalytics.com/caseysoftware/twilio-call-queue-howto)
